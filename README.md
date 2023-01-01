@@ -5,6 +5,7 @@
 課題3【Bookers2へ「いいね/コメント機能」を実装】
 課題4【Bookers2へ「フォロー/フォロワー機能」を実装】
 課題5【Bookers2へ「検索機能」を実装】
+課題6【課題3で実装した機能の非同期通信化】
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
