@@ -25,21 +25,18 @@
           </td>
           <% if @user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
-            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
+            <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger" %></td>
           <% end %>
         </tr>
       </table>
 
-          <td id = "comment-index_<%= @book.id %>">
+          <td id = "comment-index_<%= @book %>">
             <%= render 'book_comments/comment-index', book: @book %>
           </td>
 
-      <div>
-        <%= form_with model: [@book, @book_comment], local: false do |f| %>
-          <%= f.text_area :comment, rows: '5', cols: '80' %>
-          <%= f.submit "送信" %>
-        <% end %>
-      </div>
+          <td id = "form-comment">
+            <%= render 'book_comments/form-comment', book: @book, book_comment: @book_comment %>
+          </td>
 
     </div>
   </div>

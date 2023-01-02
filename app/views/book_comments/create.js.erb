@@ -1,1 +1,3 @@
 $("#comment-index_<%= @book.id %>").html("<%= escape_javascript(render pertial: 'book-comments/comment-index', locals: {book: @book}) %>")
+
+$("textarea").val('');
