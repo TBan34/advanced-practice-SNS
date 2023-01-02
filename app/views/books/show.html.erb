@@ -30,11 +30,11 @@
         </tr>
       </table>
 
-          <td id = "comment-index_<%= @book %>">
-            <%= render 'book_comments/comment-index', book: @book %>
+          <td id = "comment-index">
+            <%= render 'book_comments/comment-index', book: @book, book_comment: @book_comment %>
           </td>
 
-          <td id = "form-comment">
+          <td class = "form-comment">
             <%= render 'book_comments/form-comment', book: @book, book_comment: @book_comment %>
           </td>
 
