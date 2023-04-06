@@ -1,17 +1,5 @@
 class BooksController < ApplicationController
 
-  def show
-    @book = Book.find(params[:id])
-    @user = @book.user
-    @book_new = Book.new
-    @book_comment = BookComment.new
-  end
-
-  def index
-    @book = Book.new
-    @books = Book.all
-  end
-
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -21,6 +9,23 @@ class BooksController < ApplicationController
       @books = Book.all
       render 'index'
     end
+  end
+
+  def index
+    @book = Book.new
+    last_week = ((Time.current.at_end_of_day - 6.day).at_beginning_of_day)..(Time.current.at_end_of_day)
+    @books = Book.includes(:favorited_users)
+      .sort{|a,b| 
+        b.favorited_users.includes(:favorites).where(created_at: last_week).size <=> 
+        a.favorited_users.includes(:favorites).where(created_at: last_week).size
+        }
+  end
+
+  def show
+    @book = Book.find(params[:id])
+    @user = @book.user
+    @book_new = Book.new
+    @book_comment = BookComment.new
   end
 
   def edit
