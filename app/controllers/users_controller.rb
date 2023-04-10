@@ -1,15 +1,32 @@
 class UsersController < ApplicationController
   before_action :ensure_correct_user, only: [:update]
 
+  def index
+    @users = User.all
+    @book = Book.new
+  end
+
   def show
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
-  end
-
-  def index
-    @users = User.all
-    @book = Book.new
+    
+    current_user_room = UserRoom.where(user_id: current_user.id)
+    another_user_room = UserRoom.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      current_user_room.each do |cu|
+        another_user_room.each do |au|
+          if cu.room_id == au.room_id then
+            @is_room = true
+            @room = cu.room_id
+          end
+        end
+      end
+      if @is_room
+        @is_room = false
+        @room = Room.new
+      end
+    end
   end
 
   def edit

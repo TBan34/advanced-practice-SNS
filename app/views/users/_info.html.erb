@@ -27,7 +27,13 @@
     <% if current_user.following?(user) %>
       <th>
         <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete, class: 'btn btn-info' %>
-        <%= link_to "chatを始める" %>
+        <% if is_room = true %>
+          <%= link_to "chatへ", room_path(room) %>
+        <% else %>
+          <%= form_with model: room, url: rooms_path do |f| %>
+            <%= f.submit "chatを始める" %>
+          <% end %>
+        <% end %>
       </th>
     <% else %>
       <th><%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: 'btn btn-success' %></th>
