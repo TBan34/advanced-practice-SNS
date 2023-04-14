@@ -5,10 +5,8 @@
 <% end %>
 
 <!--チャット内容-->
-<% if @chats.exists? %>
-  <% @chats.each do |chat| %>
-    <%= chat.message %>
-  <% end %>
+<% @chats.each do |chat| %>
+  <%= chat.message %>
 <% end %>
 
 <!--チャット入力欄-->

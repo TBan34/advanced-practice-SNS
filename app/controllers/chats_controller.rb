@@ -1,7 +1,8 @@
 class ChatsController < ApplicationController
   
   def create
-    @chat = Chat.new
+    @chat = Chat.new(chat_params.merge({ user_id: current_user.id }))
+    @chat.save
     redirect_to request.referer
   end
   
